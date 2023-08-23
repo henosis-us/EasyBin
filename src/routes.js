@@ -100,31 +100,4 @@ router.post('/api/paste', (req, res) => {
       res.json(rows);
     });
   });
-  
-  // Update a Specific Paste (PUT)
-  router.put('/api/paste/:id', (req, res) => {
-    const pasteId = req.params.id;
-    const content = req.body.content;
-  
-    db.run('UPDATE pastes SET content = ? WHERE id = ?', [content, pasteId], (err) => {
-      if (err) {
-        res.status(500).json({ error: 'Database error' });
-        return;
-      }
-      res.json({ message: 'Paste updated successfully' });
-    });
-  });
-  
-  // Delete a Specific Paste (DELETE)
-  router.delete('/api/paste/:id', (req, res) => {
-    const pasteId = req.params.id;
-  
-    db.run('DELETE FROM pastes WHERE id = ?', [pasteId], (err) => {
-      if (err) {
-        res.status(500).json({ error: 'Database error' });
-        return;
-      }
-      res.json({ message: 'Paste deleted successfully' });
-    });
-  });  
 module.exports = router;
