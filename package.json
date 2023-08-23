@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "n/a"
+    "start": "node src/app.js"
   },
   "repository": {
     "type": "git",
@@ -34,4 +34,5 @@
     "sqlite3": "^5.1.6",
     "uuid": "^9.0.0"
   }
+  
 }
