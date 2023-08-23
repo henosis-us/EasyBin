@@ -12,13 +12,16 @@
         <form action="/paste" method="post" id="paste-form">
             <!-- Hidden textarea to hold the content for form submission -->
             <textarea id="hidden-textarea" name="content" style="display: none;"></textarea>
-            <!-- Contenteditable div to simulate textarea with highlighting -->
-            <div id="editable-div" contenteditable="true" placeholder="Paste your text here" oninput="updateContent()">
-                <%= pasteContent %>
+            <div id="pasteLinkContainer">
+                <a id="pasteLink" href="#" target="_blank"></a>
             </div>
+            <!-- Contenteditable div to simulate textarea with highlighting -->
+            <div id="editable-div" contenteditable="true" placeholder="Paste your text here"><%= pasteContent %></div>
             <button class="submit-button" type="submit">Copy Paste</button>
+            <span id="pasteLink"></span> <!-- Placeholder for the link -->
         </form>
     </div>
+    
     <!-- Include highlight.js library -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
     <script>
@@ -40,37 +43,41 @@
 
     // Call updateContent when the page is loaded
     window.onload = updateContent;
-        // Existing form submission logic
-        pasteForm.addEventListener('submit', async function(e) {
-            e.preventDefault(); // Prevent the default form submission
-            const content = hiddenTextarea.value; // Get the content from hidden textarea
-            const wordCount = countWords(content);
-            if (wordCount > 24000) {
-                alert('You have exceeded the 24,000 words limit. Please reduce the content.');
-                e.preventDefault();
-                return; // Stop further execution if the limit is exceeded
-            }
-            const response = await fetch('/paste', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json' // Specify that we are sending JSON
-                },
-                body: JSON.stringify({ content: content }) // Send content as JSON
-            });
-            // Rest of your code to handle the response...
-            const result = await response.json(); // Extract the JSON content from the response
-            const baseUrl = window.location.origin; // Get the base URL of the current page
-            const link = baseUrl + result.url; // Concatenate the base URL with the relative URL path
+// Existing form submission logic
+    pasteForm.addEventListener('submit', async function(e) {
+        e.preventDefault(); // Prevent the default form submission
+        
+        // Update the hidden textarea with the content from the editable div
+        updateContent();
 
-            // Copy the link to the clipboard
-            navigator.clipboard.writeText(link)
-                .then(() => {
-                    alert(`New paste created! Link copied to clipboard: ${link}`);
-                })
-                .catch(err => {
-                    alert('Failed to copy link to clipboard. You can manually copy it from here: ' + link);
-                });
+        const content = hiddenTextarea.value; // Get the content from hidden textarea
+        function countWords(str) {
+            return str.split(/\s+/).filter(Boolean).length; // Splits by whitespace and filters out empty strings
+        }
+        const wordCount = countWords(content);
+        if (wordCount > 24000) {
+            alert('You have exceeded the 24,000 words limit. Please reduce the content.');
+            return; // Stop further execution if the limit is exceeded
+        }
+
+        const response = await fetch('/paste', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // Specify that we are sending JSON
+            },
+            body: JSON.stringify({ content: content }) // Send content as JSON
         });
+
+        // Rest of your code to handle the response...
+        const result = await response.json(); // Extract the JSON content from the response
+        const baseUrl = window.location.origin; // Get the base URL of the current page
+        const link = baseUrl + result.url; // Concatenate the base URL with the relative URL path
+        // Find the placeholder element and set its content to the link
+        const pasteLinkElement = document.getElementById('pasteLink');
+        pasteLinkElement.innerText = link;
+        pasteLinkElement.href = link; // Set the href attribute to make it clickable
+    });
+
     </script>
 </body>
 </html>

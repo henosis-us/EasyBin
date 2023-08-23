@@ -66,10 +66,10 @@ router.get('/paste/:id', (req, res) => {
 // Create a New Paste (POST)
 router.post('/api/paste', (req, res) => {
     const content = req.body.content;
-    if (countWords(content) > 24000) {
-      res.status(400).json({ error: 'Paste is too long. Maximum allowed length is 24,000 words.' });
-      return;
-    }
+      if (countWords(content) > 24000) {
+    res.status(400).json({ error: 'Paste is too long. Maximum allowed length is 24,000 words.' });
+    return;
+  }
     const id = uuidv4();
     const created_at = new Date().toISOString();
   

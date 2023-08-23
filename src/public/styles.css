@@ -48,6 +48,27 @@ textarea {
   white-space: pre-line; /* Preserves newlines and collapses consecutive spaces */
   font-family: monospace; /* Optional: to make it look more like code */
 }
+#pasteLinkContainer {
+  border: 2px solid #ff5733;   /* Blue border color */
+  border-radius: 10px;          /* Rounded corners */
+  padding: 10px;                /* Padding inside the rectangle */
+  margin-bottom: 15px;          /* Space between the link container and the input box */
+  background-color: #333333;    /* Light grey background color */
+  text-align: center;           /* Center the text */
+  display: block;               /* Make it a block element */
+}
+
+#pasteLink {
+  text-decoration: none;        /* Remove underline from link */
+  color: #ff5733;               /* Blue link color */
+  font-weight: bold;            /* Bold text */
+}
+
+#pasteLink:hover {
+  text-decoration: underline;   /* Underline on hover */
+}
+
+
 /* Media Query for Medium Screens */
 @media only screen and (max-width: 800px) {
   body {
