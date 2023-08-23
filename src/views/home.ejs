@@ -44,6 +44,12 @@
         pasteForm.addEventListener('submit', async function(e) {
             e.preventDefault(); // Prevent the default form submission
             const content = hiddenTextarea.value; // Get the content from hidden textarea
+            const wordCount = countWords(content);
+            if (wordCount > 24000) {
+                alert('You have exceeded the 24,000 words limit. Please reduce the content.');
+                e.preventDefault();
+                return; // Stop further execution if the limit is exceeded
+            }
             const response = await fetch('/paste', {
                 method: 'POST',
                 headers: {

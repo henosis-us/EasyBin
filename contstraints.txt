@@ -1,8 +1,7 @@
 1. Text Paste Creation
-Input Unit: Token
-Input Constraints: Minimum of 1 token, maximum of 32,000 tokens.
-Storage Length: 1 week.
-Error Handling: Anything other than text returns an error with the message "unsupported type."
+Input Unit: words
+Input Constraints: Min: 0 Max: 24k
+Error Handling: basic
 
 2. Sharing Capability
 Link Generation: All links are unique.
@@ -11,11 +10,10 @@ Access Control: All links are public; no private links for this project.
 3. API Access
 Endpoint Definitions:
 URL Structure: Consistent naming and structure, with specific endpoints for listing, viewing, creating, editing, and deleting pastes.
-HTTP Methods: Utilizes GET, POST, PUT, DELETE for respective actions.
+HTTP Methods: to get & adjust data
 Parameters: Clear definitions for query, path, and request body parameters.
 Response Formats: Specifies successful responses in JSON and error responses with status codes and messages.
 Rate Limiting: None.
-Authentication: Hardcoded password (only one user will have access to this version).
 
 4. Code Markdown
 Library: Using highlight.js.

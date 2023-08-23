@@ -13,11 +13,18 @@ router.get('/', (req, res) => {
     res.render('home', { title: 'EasyBin', pasteContent: '' }); // Provide a default empty value for pasteContent
   });
   
+  function countWords(str) {
+    return str.split(/\s+/).filter(Boolean).length; // Splits by whitespace and filters out empty strings
+  }
+
+  router.post('/paste', (req, res) => {
+    const content = req.body.content;
   
-// Create a new paste
-router.post('/paste', (req, res) => {
-    console.log("Request body:", req.body); // Log entire request body
-    const content = req.body.content; // Get the content from the request
+    // Check word count
+    if (countWords(content) > 24000) {
+      res.status(400).send('Paste is too long. Maximum allowed length is 24,000 words.');
+      return;
+    }
     console.log("Extracted content:", content); // Log extracted content
     const id = uuidv4(); // Generate a unique ID
     const created_at = new Date().toISOString(); // Get the current datetime
@@ -59,6 +66,10 @@ router.get('/paste/:id', (req, res) => {
 // Create a New Paste (POST)
 router.post('/api/paste', (req, res) => {
     const content = req.body.content;
+    if (countWords(content) > 24000) {
+      res.status(400).json({ error: 'Paste is too long. Maximum allowed length is 24,000 words.' });
+      return;
+    }
     const id = uuidv4();
     const created_at = new Date().toISOString();
   
