@@ -1,0 +1,67 @@
+.welcome-title {
+  margin: 10px 0; /* Adjust as needed */
+  padding: 0;
+}
+
+
+body {
+  background-color: #333333; /* dark charcoal */
+  color: #ffffff; /* White text color */
+  margin: 0;
+  padding: 0;
+  font-size: 16px; /* Base font size for larger screens */
+}
+
+.container {
+  height: 100vh; /* Full viewport height */
+  position: relative; /* Set position to relative */
+}
+
+textarea {
+  width: 100%; /* Full width */
+  height: 100vh; /* Full viewport height */
+  background-color: #333333; /* Dark charcoal background */
+  color: #ffffff; /* White text color */
+  border: none; /* Remove border */
+  outline: none; /* Remove outline */
+  resize: none; /* Disable resizing */
+  font-size: 1em; /* Relative to body font size */
+}
+
+.submit-button {
+  position: absolute; /* Absolute positioning */
+  top: 10px; /* Relative offset from the top */
+  right: 1em; /* Relative offset from the right */
+  color: #ffffff;
+  background-color: #ff5733; /* Background color */
+  padding: 0.5em 1em; /* Relative padding */
+  border: none; /* Remove border */
+  cursor: pointer; /* Change cursor to pointer */
+  font-size: 1em; /* Relative to body font size */
+}
+#editable-div {
+  width: 100%;
+  height: calc(100vh - 100px);
+  border: 1px solid #ccc;
+  padding: 5px;
+  overflow: auto;
+  white-space: pre-line; /* Preserves newlines and collapses consecutive spaces */
+  font-family: monospace; /* Optional: to make it look more like code */
+}
+/* Media Query for Medium Screens */
+@media only screen and (max-width: 800px) {
+  body {
+    font-size: 14px; /* Slightly smaller font size for medium screens */
+  }
+}
+
+/* Media Query for Smaller Screens */
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 12px; /* Smaller font size for small screens */
+  }
+  .submit-button {
+    top: 0.5em; /* Smaller top offset for small screens */
+    right: 0.5em; /* Smaller right offset for small screens */
+  }
+}

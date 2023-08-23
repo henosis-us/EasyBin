@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/styles.css">
+    <!-- Include Dracula theme for highlight.js -->
+    <link rel="stylesheet" href="/dracula.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="welcome-title">Welcome to <%= title %>!</h1>
+        <form action="/paste" method="post" id="paste-form">
+            <!-- Hidden textarea to hold the content for form submission -->
+            <textarea id="hidden-textarea" name="content" style="display: none;"></textarea>
+            <!-- Contenteditable div to simulate textarea with highlighting -->
+            <div id="editable-div" contenteditable="true" placeholder="Paste your text here" oninput="updateContent()">
+                <%= pasteContent %>
+            </div>
+            <button class="submit-button" type="submit">Copy Paste</button>
+        </form>
+    </div>
+    <!-- Include highlight.js library -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+    <script>
+    hljs.initHighlightingOnLoad();
+
+    // Get the editable div and hidden textarea elements
+    const editableDiv = document.getElementById('editable-div');
+    const hiddenTextarea = document.getElementById('hidden-textarea');
+    const pasteForm = document.getElementById('paste-form');
+
+    // Function to update the hidden textarea with the content from the editable div
+    function updateContent() {
+        const rawContent = editableDiv.innerText; // Use innerText to preserve newlines
+        hiddenTextarea.value = rawContent; // Store the raw content in the hidden textarea
+        const highlightedContent = hljs.highlightAuto(rawContent).value;
+        // Temporarily replace newlines with a placeholder, then reinsert them after highlighting
+        editableDiv.innerHTML = '<pre><code class="javascript">' + highlightedContent.replace(/\n/g, '<br>') + '</code></pre>';
+    }
+
+    // Call updateContent when the page is loaded
+    window.onload = updateContent;
+        // Existing form submission logic
+        pasteForm.addEventListener('submit', async function(e) {
+            e.preventDefault(); // Prevent the default form submission
+            const content = hiddenTextarea.value; // Get the content from hidden textarea
+            const response = await fetch('/paste', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // Specify that we are sending JSON
+                },
+                body: JSON.stringify({ content: content }) // Send content as JSON
+            });
+            // Rest of your code to handle the response...
+            const result = await response.json(); // Extract the JSON content from the response
+            const baseUrl = window.location.origin; // Get the base URL of the current page
+            const link = baseUrl + result.url; // Concatenate the base URL with the relative URL path
+
+            // Copy the link to the clipboard
+            navigator.clipboard.writeText(link)
+                .then(() => {
+                    alert(`New paste created! Link copied to clipboard: ${link}`);
+                })
+                .catch(err => {
+                    alert('Failed to copy link to clipboard. You can manually copy it from here: ' + link);
+                });
+        });
+    </script>
+</body>
+</html>
