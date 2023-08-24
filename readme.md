@@ -1,5 +1,5 @@
 # EasyBin
- A super simple & basic online pastebin utility
+ A super simple & basic open source online pastebin utility
  uses express, node, html docker
 
  basic setup:
