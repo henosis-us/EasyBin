@@ -7,7 +7,7 @@
 body {
   background-color: #333333; /* dark charcoal */
   color: #ffffff; /* White text color */
-  margin: 0;
+  margin: auto;
   padding: 0;
   font-size: 16px; /* Base font size for larger screens */
 }
