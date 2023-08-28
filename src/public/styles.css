@@ -18,7 +18,7 @@ body {
 }
 
 textarea {
-  width: 100%; /* Full width */
+  width: 95%; /* Full width */
   height: 100vh; /* Full viewport height */
   background-color: #333333; /* Dark charcoal background */
   color: #ffffff; /* White text color */
@@ -40,7 +40,7 @@ textarea {
   font-size: 1em; /* Relative to body font size */
 }
 #editable-div {
-  width: 100%;
+  width: 95%;
   height: calc(100vh - 100px);
   border: 1px solid #ccc;
   padding: 5px;
