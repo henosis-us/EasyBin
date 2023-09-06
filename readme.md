@@ -1,9 +1,10 @@
 # EasyBin
- A super simple & basic online pastebin utility
+ A super simple open-source online Pastebin utility
  uses express, node, html docker
 
  basic setup:
- download & get all dependencies
+ install all dependencies
  run npm app.js
- or build with docker in CLI
+ or 
+ build with docker in CLI
  docker build -t easybin .

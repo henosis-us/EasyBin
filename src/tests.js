@@ -4,7 +4,7 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-const BASE_URL = 'http://localhost:3000'; // Adjust this to match your server's URL & port
+const BASE_URL = 'http://localhost:7755'; // Adjust this to match your server's URL & port
 
 // Test the creation of a new paste
 describe('Paste API', () => {

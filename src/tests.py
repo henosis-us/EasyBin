@@ -3,7 +3,7 @@ import json
 import uuid
 
 # Base URL of the API
-BASE_URL = "136.38.86.147:7755"  # Adjust this to match your server's URL & port
+BASE_URL = "0.0.0.0:7755"  # Adjust this to match your server's URL & port
 
 # Helper function to print the response
 def print_response(response):
