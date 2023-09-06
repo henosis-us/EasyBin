@@ -10,6 +10,7 @@ body {
   margin: 0;
   padding: 0;
   font-size: 16px; /* Base font size for larger screens */
+  overflow: hidden; /* Remove scroll bars from the page */
 }
 
 .container {
@@ -44,8 +45,8 @@ textarea {
   height: calc(100vh - 100px);
   border: 1px solid #ccc;
   padding: 5px;
-  overflow: auto;
-  white-space: pre-line; /* Preserves newlines and collapses consecutive spaces */
+  overflow: auto; /* Add a scrollbar when the content overflows */
+  white-space: pre-wrap; /* Preserves white spaces and line breaks, and breaks lines where they would overflow */
   font-family: monospace; /* Optional: to make it look more like code */
 }
 #pasteLinkContainer {
