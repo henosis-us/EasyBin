@@ -32,7 +32,7 @@
     "highlight.js": "^11.8.0",
     "marked": "^7.0.4",
     "sqlite3": "^5.1.6",
+    "tailwind-scrollbar": "^3.0.5",
     "uuid": "^9.0.0"
   }
-  
 }
